@@ -1,11 +1,13 @@
 public class Pikeman extends Hero {
-    public Pikeman(String name) {
+    public Pikeman(String name, int x, int y) {
         super(name,
                 100,
                 100,
                 5,
                 5,
-                new int[]{20, 30});
+                new int[]{20, 30},
+                x,
+                y);
     }
 
     @Override

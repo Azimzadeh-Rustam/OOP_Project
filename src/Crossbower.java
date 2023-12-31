@@ -1,11 +1,13 @@
 public class Crossbower extends Hero {
-    public Crossbower(String name) {
+    public Crossbower(String name, int x, int y) {
         super(name,
                 75,
                 75,
                 2,
                 2,
-                new int[]{10, 15});
+                new int[]{10, 15},
+                x,
+                y);
         maxArrows = 10;
         currentArrows = maxArrows;
     }
