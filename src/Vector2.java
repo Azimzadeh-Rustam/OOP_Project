@@ -1,6 +1,5 @@
 public class Vector2 {
     int x, y;
-    boolean isFree;
 
     public Vector2(int x, int y) {
         this.x = x;

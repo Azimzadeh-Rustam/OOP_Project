@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Crossbower extends Hero {
     public Crossbower(String name, int x, int y) {
         super(name,

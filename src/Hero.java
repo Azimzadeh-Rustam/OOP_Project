@@ -19,4 +19,22 @@ public abstract class Hero {
     public void printDistance(ArrayList<Hero> enemies) {
         enemies.forEach(n->System.out.print(position.getDistance(n.position) + ", "));
     }
+
+    public Hero findNearestEnemy(ArrayList<Hero> enemies) {
+        Hero nearestEnemy = enemies.getFirst();
+        for (int i = 1; i < enemies.size(); i++) {
+            if(position.getDistance(enemies.get(i).position) < position.getDistance(nearestEnemy.position)) {
+                nearestEnemy = enemies.get(i);
+            }
+        }
+        return nearestEnemy;
+    }
+
+    public void getDamage(int damage) {
+        if (currentArmor > damage) {
+            currentArmor = currentArmor - damage;
+        } else {
+            currentHealth = currentHealth + currentArmor - damage;
+        }
+    }
 }
