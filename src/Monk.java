@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Monk extends Hero {
     public Monk(String name, int x, int y) {
         super(name,
@@ -7,7 +9,13 @@ public class Monk extends Hero {
                 0,
                 new int[]{-10, -15},
                 x,
-                y);
+                y,
+                2);
+    }
+
+    @Override
+    public void step(ArrayList<Hero> enemies) {
+        return;
     }
 
     @Override

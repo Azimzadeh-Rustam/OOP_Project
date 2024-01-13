@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+
 public class Wizard extends Hero {
+
+    int maxMana, currentMana;
+
     public Wizard(String name, int x, int y) {
         super(name,
                 100,
@@ -7,12 +12,16 @@ public class Wizard extends Hero {
                 5,
                 new int[]{20, 30},
                 x,
-                y);
+                y,
+                1);
         maxMana = 100;
         currentMana = maxMana;
     }
 
-    int maxMana, currentMana;
+    @Override
+    public void step(ArrayList<Hero> enemies) {
+        return;
+    }
 
     @Override
     public String toString() {

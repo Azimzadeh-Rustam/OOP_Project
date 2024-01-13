@@ -5,21 +5,32 @@ public abstract class Archer extends Hero{
 
     protected int maxArrows, currentArrows;
 
-    public Archer(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y) {
-        super(name, maxHealth, currentHealth, maxArmor, currentArmor, damage, x, y);
+    public Archer(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y, int initiative) {
+        super(name, maxHealth, currentHealth, maxArmor, currentArmor, damage, x, y, initiative);
     }
 
-    public void attack(Hero enemy) {
+    protected void attack(Hero enemy) {
+        currentArrows -= 1;
         Random random = new Random();
-        enemy.getDamage(random.nextInt(damage[1],damage[2]));
+        enemy.getDamage(random.nextInt(damage[0],damage[1]));
     }
 
-    public void getArrows(int newArrows) {
+    protected void getArrows(int newArrows) {
+        return;
+    }
 
+    @Override
+    public void step(ArrayList<Hero> enemies) {
+        if (currentHealth > 0 && currentArrows > 0) {
+            Hero nearestEnemy = findNearestAliveEnemy(enemies);
+            attack(nearestEnemy);
+        } else {
+            return;
+        }
     }
 
     @Override
     public String toString() {
-        return "-" + name + "=> Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor + "Arrows: " + currentArrows + "/" + maxArrows;
+        return super.toString() + ", Arrows: " + currentArrows + "/" + maxArrows;
     }
 }

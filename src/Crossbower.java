@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Crossbower extends Archer {
+public class Crossbower extends Archer{
 
     public Crossbower(String name, int x, int y) {
         super(name,
@@ -10,8 +10,9 @@ public class Crossbower extends Archer {
                 2,
                 new int[]{10, 15},
                 x,
-                y);
-        this.maxArrows = this.currentArrows = 10;
+                y,
+                3);
+        this.maxArrows = this.currentArrows = 30;
     }
 
     @Override

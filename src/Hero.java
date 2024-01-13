@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
-public abstract class Hero {
+public abstract class Hero implements Game {
 
     protected String name;
     protected int maxHealth, currentHealth, maxArmor, currentArmor;
     protected int[] damage;
     protected Vector2D position;
 
-    public Hero(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y) {
+    protected int initiative;
+
+    public Hero(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y, int initiative) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
@@ -15,33 +17,68 @@ public abstract class Hero {
         this.currentArmor = currentArmor;
         this.damage = damage;
         this.position = new Vector2D(x, y);
+        this.initiative = initiative;
     }
 
-    public void printDistance(ArrayList<Hero> enemies) {
+    public String getName() {return name;}
+
+    public int getMaxHealth() {return maxHealth;}
+
+    public int getCurrentHealth() {return currentHealth;}
+
+    public int getMaxArmor() {return maxArmor;}
+
+    public int getCurrentArmor() {return currentArmor;}
+
+    public int getInitiative() {return initiative;}
+
+    protected void printDistance(ArrayList<Hero> enemies) {
         enemies.forEach(n->System.out.print(position.getDistance(n.position) + ", "));
     }
 
-    public Hero findNearestEnemy(ArrayList<Hero> enemies) {
-        Hero nearestEnemy = enemies.getFirst();
-        for (int i = 1; i < enemies.size(); i++) {
-            Hero currentEnemy = enemies.get(i);
-            if(this.position.getDistance(currentEnemy.position) < this.position.getDistance(nearestEnemy.position)) {
-                nearestEnemy = currentEnemy;
+    protected Hero findNearestAliveEnemy(ArrayList<Hero> enemies) {
+        int i;
+        Hero currentEnemy, nearestAliveEnemy = null;
+        int enemiesNumber = enemies.size();
+
+        for (i = 0; i < enemiesNumber; i++) {
+            currentEnemy = enemies.get(i);
+            if (currentEnemy.currentHealth > 0) {
+                nearestAliveEnemy = currentEnemy;
+                break;
             }
         }
-        return nearestEnemy;
+
+        for (int j = i + 1; j < enemiesNumber; j++) {
+            currentEnemy = enemies.get(j);
+            if(currentEnemy.currentHealth > 0) {
+                assert nearestAliveEnemy != null;
+                if (position.getDistance(currentEnemy.position) < position.getDistance(nearestAliveEnemy.position)) {
+                    nearestAliveEnemy = currentEnemy;
+                }
+            }
+        }
+        return nearestAliveEnemy;
     }
 
-    public void getDamage(int damage) {
+    protected void getDamage(int damage) {
         if (currentArmor > damage) {
-            currentArmor = currentArmor - damage;
+            currentArmor -= damage;
         } else {
             currentHealth = currentHealth + currentArmor - damage;
         }
     }
+/*
+    public void die(Hero this) {
+        this = null;
+    }
+*/
+
+    @Override
+    public void step(ArrayList<Hero> enemies) {}
 
     @Override
     public String toString() {
-        return "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "-" + name + " => Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
     }
 }
