@@ -12,6 +12,6 @@ public class Rogue extends Hero {
 
     @Override
     public String toString() {
-        return "Rogue" + "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "Rogue" + super.toString();
     }
 }

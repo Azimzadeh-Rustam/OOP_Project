@@ -1,4 +1,4 @@
-public class Sniper extends Hero {
+public class Sniper extends Archer {
     public Sniper(String name, int x, int y) {
         super(name,
                 75,
@@ -8,10 +8,11 @@ public class Sniper extends Hero {
                 new int[]{20, 30},
                 x,
                 y);
+        this.maxArrows = this.currentArrows = 30;
     }
 
     @Override
     public String toString() {
-        return "Sniper" + "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "Sniper" + super.toString();
     }
 }

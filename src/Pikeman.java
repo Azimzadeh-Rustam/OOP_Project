@@ -12,6 +12,6 @@ public class Pikeman extends Hero {
 
     @Override
     public String toString() {
-        return "Pikeman" + "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "Pikeman" + super.toString();
     }
 }

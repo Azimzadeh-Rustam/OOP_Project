@@ -7,8 +7,8 @@ public class Main {
         int left = 0;
         int right = 9;
 
-        heroesWhite = generateHeroes(0, left, heroesBlack);
-        heroesBlack = generateHeroes(3, right, heroesWhite);
+        heroesWhite = generateHeroes(0, left);
+        heroesBlack = generateHeroes(3, right);
 
         System.out.println("\n********* Heroes White **********");
         heroesWhite.forEach(n->System.out.println(n.toString()));
@@ -19,14 +19,14 @@ public class Main {
     static ArrayList<Hero>heroesWhite = new ArrayList<>();
     static ArrayList<Hero>heroesBlack = new ArrayList<>();
 
-    static ArrayList<Hero> generateHeroes(int amount, int x, ArrayList<Hero> heroesBlack) {
+    static ArrayList<Hero> generateHeroes(int amount, int x) {
         Random random = new Random();
         ArrayList<Hero> heroes = new ArrayList<>();
 
         for(int i = 0; i < 10; i++) {
             switch(random.nextInt(1,5) + amount) {
                 case 1:
-                    heroes.add(new Crossbower(getName(), x, i, heroesBlack));
+                    heroes.add(new Crossbower(getName(), x, i));
                     break;
                 case 2:
                     heroes.add(new Monk(getName(), x, i));

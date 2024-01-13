@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
-public class Crossbower extends Hero {
-    private ArrayList<Hero> enemies;
+public class Crossbower extends Archer {
 
-    public Crossbower(String name, int x, int y, ArrayList<Hero> enemies) {
+    public Crossbower(String name, int x, int y) {
         super(name,
                 75,
                 75,
@@ -12,20 +11,11 @@ public class Crossbower extends Hero {
                 new int[]{10, 15},
                 x,
                 y);
-        this.maxArrows = 10;
-        this.currentArrows = maxArrows;
-        this.enemies = enemies;
+        this.maxArrows = this.currentArrows = 10;
     }
-
-    int maxArrows, currentArrows;
 
     @Override
     public String toString() {
-        return "Crossbower" + "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor + ", Arrows: " + currentArrows + "/" + maxArrows;
-    }
-
-    public void attack() {
-        Hero nerestEnemy = findNearestEnemy(enemies);
-        nerestEnemy.getDamage(damage[1]);
+        return "Crossbower" + super.toString();
     }
 }

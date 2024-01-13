@@ -12,6 +12,6 @@ public class Peasant extends Hero {
 
     @Override
     public String toString() {
-        return "Peasant" + "-" + name + ", Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "Peasant" + super.toString();
     }
 }
