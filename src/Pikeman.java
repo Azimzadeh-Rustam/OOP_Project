@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class Pikeman extends Hero {
+public class Pikeman extends Melee {
     public Pikeman(String name, int x, int y) {
         super(name,
                 100,
                 100,
-                5,
-                5,
+                20,
+                20,
                 new int[]{20, 30},
                 x,
                 y,
@@ -14,7 +14,7 @@ public class Pikeman extends Hero {
     }
 
     @Override
-    public void step(ArrayList<Hero> enemies) {
+    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
         return;
     }
 

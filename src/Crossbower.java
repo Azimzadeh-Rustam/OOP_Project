@@ -13,6 +13,7 @@ public class Crossbower extends Archer{
                 y,
                 3);
         this.maxArrows = this.currentArrows = 30;
+        this.maxRangeDamage = 4;
     }
 
     @Override

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Rogue extends Hero {
+public class Rogue extends Melee {
     public Rogue(String name, int x, int y) {
         super(name,
                 100,
@@ -14,7 +14,7 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public void step(ArrayList<Hero> enemies) {
+    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
         return;
     }
 

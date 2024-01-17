@@ -25,9 +25,9 @@ public class Main {
 
         for (Hero hero : sortedTeam) {
             if (teamBlack.contains(hero)) {
-                hero.step(teamWhite);
+                hero.play(teamWhite, teamBlack);
             } else {
-                hero.step(teamWhite);
+                hero.play(teamBlack, teamWhite);
             }
         }
 

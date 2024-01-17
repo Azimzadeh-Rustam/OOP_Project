@@ -14,7 +14,7 @@ public class Peasant extends Hero {
     }
 
     @Override
-    public void step(ArrayList<Hero> enemies) {
+    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
         return;
     }
 

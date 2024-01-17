@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Hero implements Game {
 
     protected String name;
-    protected int maxHealth, currentHealth, maxArmor, currentArmor;
+    protected float maxHealth, currentHealth, maxArmor, currentArmor;
     protected int[] damage;
     protected Vector2D position;
 
@@ -22,13 +22,13 @@ public abstract class Hero implements Game {
 
     public String getName() {return name;}
 
-    public int getMaxHealth() {return maxHealth;}
+    public float getMaxHealth() {return maxHealth;}
 
-    public int getCurrentHealth() {return currentHealth;}
+    public float getCurrentHealth() {return currentHealth;}
 
-    public int getMaxArmor() {return maxArmor;}
+    public float getMaxArmor() {return maxArmor;}
 
-    public int getCurrentArmor() {return currentArmor;}
+    public float getCurrentArmor() {return currentArmor;}
 
     public int getInitiative() {return initiative;}
 
@@ -61,21 +61,19 @@ public abstract class Hero implements Game {
         return nearestAliveEnemy;
     }
 
-    protected void getDamage(int damage) {
-        if (currentArmor > damage) {
+    protected void getDamage(float damage) {
+        if (damage < currentArmor) {
             currentArmor -= damage;
         } else {
-            currentHealth = currentHealth + currentArmor - damage;
+            currentHealth += currentArmor - damage;
         }
-    }
-/*
-    public void die(Hero this) {
-        this = null;
-    }
-*/
 
-    @Override
-    public void step(ArrayList<Hero> enemies) {}
+        if (currentHealth < 0) currentHealth = 0;
+    }
+
+    public void attack(Hero enemy) {}
+
+    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {}
 
     @Override
     public String toString() {

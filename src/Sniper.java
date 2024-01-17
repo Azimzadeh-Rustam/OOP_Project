@@ -12,6 +12,7 @@ public class Sniper extends Archer {
                 y,
                 3);
         this.maxArrows = this.currentArrows = 10;
+        this.maxRangeDamage = 6;
     }
 
     @Override
