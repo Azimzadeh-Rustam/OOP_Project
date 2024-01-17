@@ -27,7 +27,7 @@ public abstract class Archer extends Hero{
 
         if (currentHealth == 0 || currentArrows == 0) return;
 
-        Hero nearestEnemy = findNearestAliveEnemy(enemies);
+        Hero nearestEnemy = nearestAlive(enemies);
         attack(nearestEnemy);
 
     }

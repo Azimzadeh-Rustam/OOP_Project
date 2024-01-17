@@ -36,7 +36,7 @@ public class Melee extends Hero {
 
         if (currentHealth == 0) return;
 
-        Hero nearestEnemy = findNearestAliveEnemy(enemies);
+        Hero nearestEnemy = nearestAlive(enemies);
         if (position.getDistance(nearestEnemy.position) < 2) {
             attack(nearestEnemy);
         } else {

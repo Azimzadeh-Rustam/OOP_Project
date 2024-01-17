@@ -36,7 +36,7 @@ public abstract class Hero implements Game {
         enemies.forEach(n->System.out.print(position.getDistance(n.position) + ", "));
     }
 
-    protected Hero findNearestAliveEnemy(ArrayList<Hero> enemies) {
+    protected Hero nearestAlive(ArrayList<Hero> enemies) {
         int i;
         Hero currentEnemy, nearestAliveEnemy = null;
         int enemiesNumber = enemies.size();
@@ -66,6 +66,7 @@ public abstract class Hero implements Game {
             currentArmor -= damage;
         } else {
             currentHealth += currentArmor - damage;
+            currentArmor = 0;
         }
 
         if (currentHealth < 0) currentHealth = 0;
