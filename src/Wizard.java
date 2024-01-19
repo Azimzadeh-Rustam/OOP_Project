@@ -19,8 +19,8 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
-        return;
+    public String getInfo() {
+        return "Wizard";
     }
 
     @Override

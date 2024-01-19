@@ -14,8 +14,8 @@ public class Pikeman extends Melee {
     }
 
     @Override
-    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
-        return;
+    public String getInfo() {
+        return "Pikeman";
     }
 
     @Override

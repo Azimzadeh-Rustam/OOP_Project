@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+// Healing temates
+
 public class Monk extends Hero {
     public Monk(String name, int x, int y) {
         super(name,
@@ -14,8 +16,8 @@ public class Monk extends Hero {
     }
 
     @Override
-    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
-        return;
+    public String getInfo() {
+        return "Monk";
     }
 
     @Override

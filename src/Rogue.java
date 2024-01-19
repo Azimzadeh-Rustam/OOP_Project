@@ -14,8 +14,8 @@ public class Rogue extends Melee {
     }
 
     @Override
-    public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
-        return;
+    public String getInfo() {
+        return "Rogue";
     }
 
     @Override

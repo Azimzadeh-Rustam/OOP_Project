@@ -9,7 +9,7 @@ public abstract class Archer extends Hero{
         super(name, maxHealth, currentHealth, maxArmor, currentArmor, damage, x, y, initiative);
     }
 
-    protected void getArrows(int newArrows) {
+    protected void receiveArrows(int newArrows) {
         currentArrows += newArrows;
     }
 
@@ -19,7 +19,7 @@ public abstract class Archer extends Hero{
 
         Random random = new Random();
         int damagePoint = position.getDistance(enemy.position) < maxRangeDamage? random.nextInt(damage[0],damage[1]) : damage[0];
-        enemy.getDamage(damagePoint);
+        enemy.receiveDamage(damagePoint);
     }
 
     @Override
@@ -28,6 +28,9 @@ public abstract class Archer extends Hero{
         if (currentHealth == 0 || currentArrows == 0) return;
 
         Hero nearestEnemy = nearestAlive(enemies);
+
+        if (nearestEnemy == null) return;
+
         attack(nearestEnemy);
 
     }

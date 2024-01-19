@@ -5,14 +5,19 @@ public class Sniper extends Archer {
         super(name,
                 75,
                 75,
-                5,
-                5,
+                10,
+                10,
                 new int[]{25, 35},
                 x,
                 y,
                 3);
         this.maxArrows = this.currentArrows = 10;
-        this.maxRangeDamage = 6;
+        this.maxRangeDamage = 15;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Sniper";
     }
 
     @Override

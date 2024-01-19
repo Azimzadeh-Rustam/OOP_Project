@@ -30,7 +30,13 @@ public abstract class Hero implements Game {
 
     public float getCurrentArmor() {return currentArmor;}
 
+    public int[] getPosotion() {
+        return new int[]{position.x, position.y};
+    }
+
     public int getInitiative() {return initiative;}
+
+    public abstract String getInfo();
 
     protected void printDistance(ArrayList<Hero> enemies) {
         enemies.forEach(n->System.out.print(position.getDistance(n.position) + ", "));
@@ -61,11 +67,11 @@ public abstract class Hero implements Game {
         return nearestAliveEnemy;
     }
 
-    protected void getDamage(float damage) {
+    protected void receiveDamage(float damage) {
         if (damage < currentArmor) {
             currentArmor -= damage;
         } else {
-            currentHealth += currentArmor - damage;
+            currentHealth -= (damage - currentArmor);
             currentArmor = 0;
         }
 
@@ -78,6 +84,6 @@ public abstract class Hero implements Game {
 
     @Override
     public String toString() {
-        return "-" + name + " => Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor;
+        return "-" + name + " => Health: " + currentHealth + "/" + maxHealth + ", Armor: " + currentArmor + "/" + maxArmor + ", Coords: (" + position.x + ", " + position.y + ")";
     }
 }

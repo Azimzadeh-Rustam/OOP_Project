@@ -1,53 +1,55 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        int left = 0;
-        int right = 9;
+        int left = 1;
+        int right = 10;
+        boolean whoWon;
 
-        teamWhite = generateHeroes(0, left);
-        teamBlack = generateHeroes(3, right);
+        Scanner input = new Scanner(System.in);
 
-        sortedTeam.addAll(teamWhite);
-        sortedTeam.addAll(teamBlack);
-        sortedTeam.sort((o1, o2)->o2.getInitiative()-o1.getInitiative());
+        teamBlue = generateHeroes(0, left);
+        teamGreen = generateHeroes(3, right);
 
-        System.out.println("\n********* Heroes White **********");
-        teamWhite.forEach(n->System.out.println(n.toString()));
-        System.out.println("\n********* Heroes Black **********");
-        teamBlack.forEach(n->System.out.println(n.toString()));
-        //heroesBlack.forEach(n->n.printDistance(heroesWhite));
+        allSortedTeam.addAll(teamBlue);
+        allSortedTeam.addAll(teamGreen);
+        allSortedTeam.sort((o1, o2)->o2.getInitiative()-o1.getInitiative());
 
-        System.out.println("\n********* FIGHT **********");
-
-        for (Hero hero : sortedTeam) {
-            if (teamBlack.contains(hero)) {
-                hero.play(teamWhite, teamBlack);
-            } else {
-                hero.play(teamBlack, teamWhite);
+        while (true) {
+            View.view();
+            if (allDead(teamBlue)) {
+                whoWon = true;
+                break;
+            }
+            if (allDead(teamGreen)) {
+                whoWon = false;
+                break;
+            }
+            input.nextLine();
+            for (Hero hero : allSortedTeam) {
+                if (teamGreen.contains(hero)) {
+                    hero.play(teamBlue, teamGreen);
+                } else {
+                    hero.play(teamGreen, teamBlue);
+                }
             }
         }
-
-        System.out.println("\n********* Heroes White **********");
-        teamWhite.forEach(n->System.out.println(n.toString()));
-        System.out.println("\n********* Heroes Black **********");
-        teamBlack.forEach(n->System.out.println(n.toString()));
+        System.out.println(whoWon? "Green team wins" : "Blue team wins");
     }
-    static ArrayList<Hero>teamWhite = new ArrayList<>();
-    static ArrayList<Hero>teamBlack = new ArrayList<>();
-    static ArrayList<Hero> sortedTeam = new ArrayList<>();
+
+    public static ArrayList<Hero> teamBlue = new ArrayList<>();
+    public static ArrayList<Hero> teamGreen = new ArrayList<>();
+    public static ArrayList<Hero> allSortedTeam = new ArrayList<>();
 
     static ArrayList<Hero> generateHeroes(int amount, int x) {
         Random random = new Random();
         ArrayList<Hero> heroes = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             switch(random.nextInt(1,5) + amount) {
                 case 1:
-                    heroes.add(new Crossbower(getName(), x, i));
+                    heroes.add(new Crossbowman(getName(), x, i));
                     break;
                 case 2:
                     heroes.add(new Monk(getName(), x, i));
@@ -71,6 +73,15 @@ public class Main {
         }
 
         return heroes;
+    }
+
+    static boolean allDead(ArrayList<Hero> team) {
+
+        for (Hero hero : team) {
+            if (hero.currentHealth > 0) return false;
+        }
+
+        return true;
     }
 
     static String getName() {
