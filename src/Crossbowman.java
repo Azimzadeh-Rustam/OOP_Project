@@ -9,9 +9,10 @@ public class Crossbowman extends Archer{
                 new int[]{10, 15},
                 x,
                 y,
-                3);
-        this.maxArrows = this.arrows = 30;
-        this.maxRangeDamage = 3;
+                3,
+                30,
+                30,
+                7);
     }
 
     @Override

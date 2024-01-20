@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Archer extends Hero{
+public abstract class Archer extends Hero {
 
     protected int maxArrows, arrows, maxRangeDamage;
 
-    public Archer(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y, int initiative) {
+    public Archer(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y, int initiative, int maxArrows, int arrows, int maxRangeDamage) {
         super(name, maxHealth, currentHealth, maxArmor, currentArmor, damage, x, y, initiative);
+        this.maxArrows = maxArrows;
+        this.arrows = arrows;
+        this.maxRangeDamage = maxRangeDamage;
     }
 
     protected void receiveArrows(int newArrows) {
@@ -18,7 +21,7 @@ public abstract class Archer extends Hero{
         arrows -= 1;
 
         Random random = new Random();
-        int damagePoint = position.getDistance(enemy.position) < maxRangeDamage? random.nextInt(damage[0],damage[1]) : damage[0];
+        int damagePoint = position.getDistance(enemy) < maxRangeDamage? random.nextInt(damage[0],damage[1]) : damage[0];
         enemy.receiveDamage(damagePoint);
     }
 
@@ -28,8 +31,9 @@ public abstract class Archer extends Hero{
         if (health == 0 || arrows == 0) return;
         Hero nearestEnemy = nearestAlive(enemies);
         if (nearestEnemy == null) return;
-        attack(nearestEnemy);
-
+        if (position.getDistance(nearestEnemy) < maxRangeDamage) {
+            attack(nearestEnemy);
+        }
     }
 
     @Override

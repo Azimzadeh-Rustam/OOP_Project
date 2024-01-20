@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Melee extends Hero {
 
-    public Melee(String name, int maxHealth, int currentHealth, int maxArmor, int currentArmor, int[] damage, int x, int y, int initiative) {
-        super(name, maxHealth, currentHealth, maxArmor, currentArmor, damage, x, y, initiative);
+    public Melee(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative) {
+        super(name, maxHealth, health, maxArmor, armor, damage, x, y, initiative);
     }
 
     @Override
@@ -18,9 +18,9 @@ public class Melee extends Hero {
         enemy.receiveDamage(random.nextInt(damage[0],damage[1]));
     }
 
-    public Vector2D takeStep(Hero enemy) {
+    public Vector2D takeStep(Hero hero) {
         int step = 1;
-        Vector2D deltas = position.getDeltas(enemy.position);
+        Vector2D deltas = position.getDeltas(hero.position);
         Vector2D nextPosition = new Vector2D(position.getX(), position.getY());
 
         int deltaX = deltas.getX();
@@ -48,7 +48,7 @@ public class Melee extends Hero {
 
         if(nearestEnemy == null) return;
 
-        if (position.getDistance(nearestEnemy.position) < 2) {
+        if (position.getDistance(nearestEnemy) < 2) {
             attack(nearestEnemy);
         } else {
             Vector2D nextPosition = takeStep(nearestEnemy);

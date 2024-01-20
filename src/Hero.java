@@ -39,16 +39,16 @@ public abstract class Hero implements Game {
     public abstract String getInfo();
 
     protected void printDistance(ArrayList<Hero> enemies) {
-        enemies.forEach(n->System.out.print(position.getDistance(n.position) + ", "));
+        enemies.forEach(n->System.out.print(position.getDistance(n) + ", "));
     }
 
-    protected Hero nearestAlive(ArrayList<Hero> enemies) {
+    protected Hero nearestAlive(ArrayList<Hero> heroes) {
         int i;
         Hero currentEnemy, nearestAliveEnemy = null;
-        int enemiesSize = enemies.size();
+        int enemiesSize = heroes.size();
 
         for (i = 0; i < enemiesSize; i++) {
-            currentEnemy = enemies.get(i);
+            currentEnemy = heroes.get(i);
             if (currentEnemy.health > 0) {
                 nearestAliveEnemy = currentEnemy;
                 break;
@@ -56,10 +56,10 @@ public abstract class Hero implements Game {
         }
 
         for (int j = i + 1; j < enemiesSize; j++) {
-            currentEnemy = enemies.get(j);
+            currentEnemy = heroes.get(j);
             if(currentEnemy.health > 0) {
                 assert nearestAliveEnemy != null;
-                if (position.getDistance(currentEnemy.position) < position.getDistance(nearestAliveEnemy.position)) {
+                if (position.getDistance(currentEnemy) < position.getDistance(nearestAliveEnemy)) {
                     nearestAliveEnemy = currentEnemy;
                 }
             }
@@ -77,6 +77,10 @@ public abstract class Hero implements Game {
         }
 
         if (health < 0) health = 0;
+    }
+
+    protected void receiveHealing(float healPoint) {
+        health += healPoint;
     }
 
     public void attack(Hero enemy) {}

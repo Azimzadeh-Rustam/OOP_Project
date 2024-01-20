@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-// Healing temates
-
-public class Monk extends Hero {
+public class Monk extends Healer {
     public Monk(String name, int x, int y) {
         super(name,
                 50,
@@ -12,7 +10,8 @@ public class Monk extends Hero {
                 new int[]{-10, -15},
                 x,
                 y,
-                2);
+                2,
+                7);
     }
 
     @Override

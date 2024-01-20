@@ -1,4 +1,3 @@
-import javax.print.DocFlavor;
 import java.util.*;
 
 public class Main {
@@ -36,7 +35,8 @@ public class Main {
                 }
             }
         }
-        System.out.println((whoWon? "Green team" : "Blue team") + " won");
+        String winner = whoWon? "Green team" : "Blue team";
+        System.out.println(winner + " won");
     }
 
     public static ArrayList<Hero> teamBlue = new ArrayList<>();

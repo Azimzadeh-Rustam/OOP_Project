@@ -8,9 +8,10 @@ public class Sniper extends Archer {
                 new int[]{25, 35},
                 x,
                 y,
-                3);
-        this.maxArrows = this.arrows = 10;
-        this.maxRangeDamage = 15;
+                3,
+                10,
+                10,
+                15);
     }
 
     @Override

@@ -14,8 +14,9 @@ public class Vector2D {
 
     public void setY(int newY) {y = newY;}
 
-    public float getDistance(Vector2D positionEnemy) {
-        return (float) Math.sqrt(Math.pow(x - positionEnemy.x, 2) + Math.pow(y - positionEnemy.y, 2));
+    public float getDistance(Hero hero) {
+        Vector2D position = hero.position;
+        return (float) Math.sqrt(Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2));
     }
 
     public Vector2D getDeltas(Vector2D positionEnemy) {
