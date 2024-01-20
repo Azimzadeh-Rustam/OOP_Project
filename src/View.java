@@ -25,8 +25,8 @@ public class View {
     private static String getChar(int x, int y){
         String out = "| ";
         for (Hero hero : Main.allSortedTeam) {
-            if (hero.getPosotion()[0] == x && hero.getPosotion()[1] == y){
-                if (hero.getCurrentHealth() == 0) {
+            if (hero.getPosition()[0] == x && hero.getPosition()[1] == y){
+                if (hero.getHealth() == 0) {
                     out = "|" + (AnsiColors.ANSI_RED + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }

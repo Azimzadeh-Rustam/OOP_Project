@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.*;
 
 public class Main {
@@ -35,7 +36,7 @@ public class Main {
                 }
             }
         }
-        System.out.println(whoWon? "Green team wins" : "Blue team wins");
+        System.out.println((whoWon? "Green team" : "Blue team") + " won");
     }
 
     public static ArrayList<Hero> teamBlue = new ArrayList<>();
@@ -78,7 +79,7 @@ public class Main {
     static boolean allDead(ArrayList<Hero> team) {
 
         for (Hero hero : team) {
-            if (hero.currentHealth > 0) return false;
+            if (hero.health > 0) return false;
         }
 
         return true;

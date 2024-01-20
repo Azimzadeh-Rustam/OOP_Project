@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Sniper extends Archer {
     public Sniper(String name, int x, int y) {
         super(name,
@@ -11,7 +9,7 @@ public class Sniper extends Archer {
                 x,
                 y,
                 3);
-        this.maxArrows = this.currentArrows = 10;
+        this.maxArrows = this.arrows = 10;
         this.maxRangeDamage = 15;
     }
 

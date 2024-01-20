@@ -42,7 +42,7 @@ public class Melee extends Hero {
     @Override
     public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
 
-        if (currentHealth == 0) return;
+        if (health == 0) return;
 
         Hero nearestEnemy = nearestAlive(enemies);
 

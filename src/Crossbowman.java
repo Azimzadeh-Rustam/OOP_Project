@@ -10,7 +10,7 @@ public class Crossbowman extends Archer{
                 x,
                 y,
                 3);
-        this.maxArrows = this.currentArrows = 30;
+        this.maxArrows = this.arrows = 30;
         this.maxRangeDamage = 3;
     }
 
