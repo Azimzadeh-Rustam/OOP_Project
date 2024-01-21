@@ -10,6 +10,7 @@ public class Pikeman extends Melee {
                 new int[]{20, 30},
                 x,
                 y,
+                2,
                 2);
     }
 

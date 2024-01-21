@@ -38,6 +38,10 @@ public abstract class Hero implements Game {
 
     public abstract String getInfo();
 
+    public boolean isDead() {
+        return health == 0;
+    }
+
     protected void printDistance(ArrayList<Hero> enemies) {
         enemies.forEach(n->System.out.print(position.getDistance(n) + ", "));
     }

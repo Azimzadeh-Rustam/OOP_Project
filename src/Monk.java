@@ -11,7 +11,8 @@ public class Monk extends Healer {
                 x,
                 y,
                 2,
-                7);
+                7,
+                2);
     }
 
     @Override

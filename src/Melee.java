@@ -3,8 +3,11 @@ import java.util.Random;
 
 public class Melee extends Hero {
 
-    public Melee(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative) {
+    protected int maxRangeAttack;
+
+    public Melee(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int maxRangeAttack) {
         super(name, maxHealth, health, maxArmor, armor, damage, x, y, initiative);
+        this.maxRangeAttack = maxRangeAttack;
     }
 
     @Override
@@ -42,13 +45,10 @@ public class Melee extends Hero {
     @Override
     public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {
 
-        if (health == 0) return;
-
+        if (this.isDead()) return;
         Hero nearestEnemy = nearestAlive(enemies);
-
         if(nearestEnemy == null) return;
-
-        if (position.getDistance(nearestEnemy) < 2) {
+        if (position.getDistance(nearestEnemy) < maxRangeAttack) {
             attack(nearestEnemy);
         } else {
             Vector2D nextPosition = takeStep(nearestEnemy);
