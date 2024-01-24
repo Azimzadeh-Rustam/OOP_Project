@@ -12,11 +12,13 @@ public class Crossbowman extends Archer{
                 3,
                 30,
                 30,
-                7);
+                7,
+                10,
+                2);
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Crossbowman";
     }
 

@@ -9,13 +9,15 @@ public class Sniper extends Archer {
                 x,
                 y,
                 3,
+                7,
+                7,
+                15,
                 10,
-                10,
-                15);
+                2);
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Sniper";
     }
 

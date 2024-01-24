@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-public class Wizard extends Hero {
-
-    int maxMana, currentMana;
+public class Wizard extends Healer {
 
     public Wizard(String name, int x, int y) {
         super(name,
@@ -13,13 +11,16 @@ public class Wizard extends Hero {
                 new int[]{20, 30},
                 x,
                 y,
-                1);
-        maxMana = 100;
-        currentMana = maxMana;
+                1,
+                5,
+                2,
+                100,
+                100,
+                7);
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Wizard";
     }
 

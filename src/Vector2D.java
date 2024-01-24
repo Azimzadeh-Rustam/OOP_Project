@@ -19,8 +19,8 @@ public class Vector2D {
         return (float) Math.sqrt(Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2));
     }
 
-    public Vector2D getDeltas(Vector2D positionEnemy) {
-        return new Vector2D(x - positionEnemy.x, y - positionEnemy.y);
+    public Vector2D getDeltas(Hero enemy) {
+        return new Vector2D(x - enemy.position.x, y - enemy.position.y);
     }
 
     public boolean equals(Vector2D positionEnemy) {

@@ -1,7 +1,7 @@
 import java.util.Collections;
 
 public class View {
-    private static int step = 1;
+    private static int step = 0;
     private static int l = 0;
     private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("-b"))) + formatDiv("-c");
     private static final String midl10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("-e"))) + formatDiv("-f");
@@ -27,18 +27,18 @@ public class View {
         for (Hero hero : Main.allSortedTeam) {
             if (hero.getPosition()[0] == x && hero.getPosition()[1] == y){
                 if (hero.getHealth() == 0) {
-                    out = "|" + (AnsiColors.ANSI_RED + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
+                    out = "|" + (AnsiColors.ANSI_RED + hero.getType().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
-                if (Main.teamGreen.contains(hero)) out = "|" + (AnsiColors.ANSI_GREEN + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
-                if (Main.teamBlue.contains(hero)) out = "|" + (AnsiColors.ANSI_BLUE + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
+                if (Main.teamGreen.contains(hero)) out = "|" + (AnsiColors.ANSI_GREEN + hero.getType().charAt(0) + AnsiColors.ANSI_RESET);
+                if (Main.teamBlue.contains(hero)) out = "|" + (AnsiColors.ANSI_BLUE + hero.getType().charAt(0) + AnsiColors.ANSI_RESET);
                 break;
             }
         }
         return out;
     }
     public static void view() {
-        if (step == 1){
+        if (step == 0){
             System.out.print(AnsiColors.ANSI_RED + "FIGHT" + AnsiColors.ANSI_RESET);
         } else {
             System.out.print(AnsiColors.ANSI_RED + "Step:" + step + AnsiColors.ANSI_RESET);

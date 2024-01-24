@@ -12,11 +12,14 @@ public class Monk extends Healer {
                 y,
                 2,
                 7,
-                2);
+                3,
+                100,
+                100,
+                5);
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Monk";
     }
 

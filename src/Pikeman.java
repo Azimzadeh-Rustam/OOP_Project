@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pikeman extends Melee {
     public Pikeman(String name, int x, int y) {
@@ -15,7 +16,7 @@ public class Pikeman extends Melee {
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Pikeman";
     }
 

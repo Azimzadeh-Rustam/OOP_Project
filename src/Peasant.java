@@ -14,7 +14,7 @@ public class Peasant extends Hero {
     }
 
     @Override
-    public String getInfo() {
+    public String getType() {
         return "Peasant";
     }
 
