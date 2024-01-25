@@ -1,4 +1,12 @@
-import java.util.*;
+package Main;
+
+import Heroes.*;
+import TypesOfHero.Hero;
+import View.View;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -79,7 +87,7 @@ public class Main {
     static boolean allDead(ArrayList<Hero> team) {
 
         for (Hero hero : team) {
-            if (hero.health > 0) return false;
+            if (hero.getHealth() > 0) return false;
         }
 
         return true;

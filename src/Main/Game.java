@@ -1,3 +1,5 @@
+package Main;
+import TypesOfHero.Hero;
 import java.util.ArrayList;
 
 public interface Game {

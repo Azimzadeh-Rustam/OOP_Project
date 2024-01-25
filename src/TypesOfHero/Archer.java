@@ -1,3 +1,5 @@
+package TypesOfHero;
+import Main.Vector2D;
 import java.util.ArrayList;
 import java.util.Random;
 

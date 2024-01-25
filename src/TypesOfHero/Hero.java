@@ -1,3 +1,6 @@
+package TypesOfHero;
+import Main.*;
+
 import java.util.ArrayList;
 
 public abstract class Hero implements Game {
@@ -26,9 +29,7 @@ public abstract class Hero implements Game {
     public float getHealth() {return health;}
     public float getMaxArmor() {return maxArmor;}
     public float getArmor() {return armor;}
-    public int[] getPosition() {
-        return new int[]{position.x, position.y};
-    }
+    public Vector2D getPosition() {return new Vector2D (position.getX(), position.getY());}
     public int getInitiative() {return initiative;}
 
     public boolean isDead() {
@@ -132,6 +133,6 @@ public abstract class Hero implements Game {
 
     @Override
     public String toString() {
-        return "-" + name + " => Health: " + health + "/" + maxHealth + ", Armor: " + armor + "/" + maxArmor + ", Coords: (" + position.x + ", " + position.y + ")";
+        return "-" + name + " => Health: " + health + "/" + maxHealth + ", Armor: " + armor + "/" + maxArmor + ", Coords: (" + position.getX() + ", " + position.getY() + ")";
     }
 }

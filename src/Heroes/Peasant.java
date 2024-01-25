@@ -1,3 +1,6 @@
+package Heroes;
+import TypesOfHero.Citizen;
+
 public class Peasant extends Citizen {
     public Peasant(String name, int x, int y) {
         super(name,

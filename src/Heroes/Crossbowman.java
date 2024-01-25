@@ -1,4 +1,7 @@
-public class Crossbowman extends Archer{
+package Heroes;
+import TypesOfHero.Archer;
+
+public class Crossbowman extends Archer {
 
     public Crossbowman(String name, int x, int y) {
         super(name,

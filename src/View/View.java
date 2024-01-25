@@ -1,3 +1,7 @@
+package View;
+import Main.*;
+import TypesOfHero.Hero;
+
 import java.util.Collections;
 
 public class View {
@@ -25,7 +29,7 @@ public class View {
     private static String getChar(int x, int y){
         String out = "| ";
         for (Hero hero : Main.allSortedTeam) {
-            if (hero.getPosition()[0] == x && hero.getPosition()[1] == y){
+            if (hero.getPosition().getX() == x && hero.getPosition().getY() == y){
                 if (hero.getHealth() == 0) {
                     out = "|" + (AnsiColors.ANSI_RED + hero.getType().charAt(0) + AnsiColors.ANSI_RESET);
                     break;

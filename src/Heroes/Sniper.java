@@ -1,3 +1,6 @@
+package Heroes;
+import TypesOfHero.Archer;
+
 public class Sniper extends Archer {
     public Sniper(String name, int x, int y) {
         super(name,

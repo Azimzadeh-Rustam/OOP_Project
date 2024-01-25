@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Heroes;
+import TypesOfHero.Healer;
 
 public class Monk extends Healer {
     public Monk(String name, int x, int y) {

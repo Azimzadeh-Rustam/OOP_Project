@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.Objects;
+package Heroes;
+import TypesOfHero.Melee;
 
 public class Pikeman extends Melee {
     public Pikeman(String name, int x, int y) {

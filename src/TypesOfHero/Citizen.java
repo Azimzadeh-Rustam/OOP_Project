@@ -1,4 +1,6 @@
-public class Citizen extends Hero{
+package TypesOfHero;
+
+public class Citizen extends Hero {
 
     protected boolean isBusy;
 

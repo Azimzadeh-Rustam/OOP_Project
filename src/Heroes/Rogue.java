@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Heroes;
+import TypesOfHero.Melee;
 
 public class Rogue extends Melee {
     public Rogue(String name, int x, int y) {

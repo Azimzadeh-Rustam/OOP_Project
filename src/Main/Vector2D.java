@@ -1,3 +1,6 @@
+package Main;
+import TypesOfHero.*;
+
 public class Vector2D {
     protected int x, y;
 
@@ -15,12 +18,12 @@ public class Vector2D {
     public void setY(int newY) {y = newY;}
 
     public float getDistance(Hero hero) {
-        Vector2D position = hero.position;
+        Vector2D position = hero.getPosition();
         return (float) Math.sqrt(Math.pow(x - position.x, 2) + Math.pow(y - position.y, 2));
     }
 
     public Vector2D getDeltas(Hero enemy) {
-        return new Vector2D(x - enemy.position.x, y - enemy.position.y);
+        return new Vector2D(x - enemy.getPosition().x, y - enemy.getPosition().y);
     }
 
     public boolean equals(Vector2D positionEnemy) {

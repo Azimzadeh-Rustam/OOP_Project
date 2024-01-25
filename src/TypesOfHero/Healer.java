@@ -1,3 +1,6 @@
+package TypesOfHero;
+import Main.Vector2D;
+
 import java.util.ArrayList;
 
 public abstract class Healer extends Hero {
@@ -20,7 +23,7 @@ public abstract class Healer extends Hero {
 
     protected boolean canHeal(Hero teammate) {
         double distance = position.getDistance(teammate);
-        return (distance < maxRangeHeal) && (teammate.health < teammate.maxHealth - healPoint) && (mana >= healPoint);
+        return (distance < maxRangeHeal) && (teammate.getHealth() < teammate.getMaxHealth() - healPoint) && (mana >= healPoint);
     }
 
     protected void heal (Hero teammate) {
@@ -46,8 +49,8 @@ public abstract class Healer extends Hero {
     }
 
     protected void resurrect(Hero teammate) {
-        teammate.receiveHealing(teammate.maxHealth);
-        mana -= (int) teammate.maxHealth;
+        teammate.receiveHealing(teammate.getMaxHealth());
+        mana -= (int) teammate.getMaxHealth();
     }
 
     protected void helpNearestDeadMelee(ArrayList<Hero> teammates) {

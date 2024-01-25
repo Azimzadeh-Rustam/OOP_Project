@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Heroes;
+import TypesOfHero.Healer;
 
 public class Wizard extends Healer {
 
