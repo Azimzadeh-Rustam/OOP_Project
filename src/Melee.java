@@ -35,14 +35,6 @@ public class Melee extends Hero {
             return;
         }
 
-        Vector2D nextPosition = nextPosition(nearestAliveEnemy);
-        boolean stepIsFree = true;
-        for (Hero teammate : teammates) {
-            if (nextPosition.equals(teammate.position)) {
-                stepIsFree = false;
-                break;
-            }
-        }
-        if (stepIsFree) position = nextPosition;
+        moveToward(nearestAliveEnemy, teammates);
     }
 }

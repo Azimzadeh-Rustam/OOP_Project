@@ -18,6 +18,17 @@ public abstract class Archer extends Hero {
         arrows += newArrows;
     }
 
+    public void bringArrows(Citizen hero, ArrayList<Hero> teammates) {
+        hero.setStatus(true);
+        if (hero.position.getDistance(this) < 2) {
+            hero.giveArrows(this);
+            hero.setStatus(false);
+            return;
+        }
+
+        hero.moveToward(this, teammates);
+    }
+
     protected void shoot(Hero enemy) {
         arrows -= 1;
 
@@ -39,22 +50,22 @@ public abstract class Archer extends Hero {
         Hero nearestEnemy = nearest(enemies, "alive", "any");
 
         if (nearestEnemy == null) return;
-
+/*
+        int criticalArrows = (this.getType() == "Sniper" ? 3 : 5);
+        if (arrows < criticalArrows) {
+            Citizen nearestFreePeasant = nearestFreeCitizen(teammates);
+            if (nearestFreePeasant != null) {
+                bringArrows(nearestFreePeasant, teammates);
+            }
+        }
+*/
         double distanceToNearestEnemy = position.getDistance(nearestEnemy);
 
         if (arrows == 0) {
             if (distanceToNearestEnemy < maxRangeAttack) {
                 attack(nearestEnemy);
             } else {
-                Vector2D nextPosition = nextPosition(nearestEnemy);
-                boolean stepIsFree = true;
-                for (Hero teammate : teammates) {
-                    if (nextPosition.equals(teammate.position)) {
-                        stepIsFree = false;
-                        break;
-                    }
-                }
-                if (stepIsFree) position = nextPosition;
+                moveToward(nearestEnemy, teammates);
             }
             return;
         }
@@ -64,15 +75,7 @@ public abstract class Archer extends Hero {
             return;
         }
 
-        Vector2D nextPosition = nextPosition(nearestEnemy);
-        boolean stepIsFree = true;
-        for (Hero teammate : teammates) {
-            if (nextPosition.equals(teammate.position)) {
-                stepIsFree = false;
-                break;
-            }
-        }
-        if (stepIsFree) position = nextPosition;
+        moveToward(nearestEnemy, teammates);
     }
 
     @Override

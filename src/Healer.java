@@ -20,7 +20,7 @@ public abstract class Healer extends Hero {
 
     protected boolean canHeal(Hero teammate) {
         double distance = position.getDistance(teammate);
-        return (distance < maxRangeHeal) && (teammate.health < teammate.maxHealth - healPoint);
+        return (distance < maxRangeHeal) && (teammate.health < teammate.maxHealth - healPoint) && (mana >= healPoint);
     }
 
     protected void heal (Hero teammate) {
@@ -52,7 +52,7 @@ public abstract class Healer extends Hero {
 
     protected void helpNearestDeadMelee(ArrayList<Hero> teammates) {
 
-        String infantryType = this.getType() == "Monk" ? "Pikeman" : "Rogue";
+        String infantryType = (this.getType() == "Monk" ? "Pikeman" : "Rogue");
 
         Hero nearestDeadInfantryman = nearest(teammates, "dead", infantryType);
 
@@ -93,23 +93,17 @@ public abstract class Healer extends Hero {
             return;
         }
 
-        Hero nearestAliveTeammate = nearest(teammates, "alive", "any");
+        Hero nearestWoundedTeammate = nearest(teammates, "wounded", "any");
 
-        if (canHeal(nearestAliveTeammate)) {
-            if (mana >= healPoint) {
-                heal(nearestAliveTeammate);
-            }            
+        if (nearestWoundedTeammate == null) return;
+
+        if (canHeal(nearestWoundedTeammate)) {
+            heal(nearestWoundedTeammate);
             regenerateMana();
             return;
         }
 
-        Vector2D nextPosition = nextPosition(nearestAliveTeammate);
-        boolean stepIsFree = true;
-        for (Hero teammate : teammates) {
-            if (nextPosition.equals(teammate.position)) stepIsFree = false;
-        }
-        if (stepIsFree) position = nextPosition;
-
+        moveToward(nearestWoundedTeammate, teammates);
         regenerateMana();
     }
 

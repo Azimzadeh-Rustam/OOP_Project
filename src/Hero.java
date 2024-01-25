@@ -35,7 +35,7 @@ public abstract class Hero implements Game {
         return health == 0;
     }
 
-    public Vector2D nextPosition(Hero hero) {
+    protected Vector2D nextPosition(Hero hero) {
         int step = 1;
         Vector2D deltas = position.getDeltas(hero);
         Vector2D nextPosition = new Vector2D(position.getX(), position.getY());
@@ -56,17 +56,32 @@ public abstract class Hero implements Game {
         return nextPosition;
     }
 
+    protected void moveToward(Hero hero, ArrayList<Hero> teammates) {
+        Vector2D nextPosition = nextPosition(hero);
+        boolean isStepFree = true;
+        for (Hero teammate : teammates) {
+            if (nextPosition.equals(teammate.position) && teammate.health > 0) {
+                isStepFree = false;
+                break;
+            }
+        }
+        if (isStepFree) position = nextPosition;
+    }
+
     protected Hero nearest(ArrayList<Hero> heroes, String status, String type) {
         Hero currentHero, nearestHero = null;
         int teamSize = heroes.size();
         int i;
+        boolean isAlive;
+        boolean isWounded;
 
         for (i = 0; i < teamSize; i++) {
             currentHero = heroes.get(i);
 
-            boolean isAlive = currentHero.health > 0;
+            isAlive = currentHero.health > 0;
+            isWounded = currentHero.health < currentHero.maxHealth * 0.4;
 
-            if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive)) {
+            if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive) || (status == "wounded" && isWounded) ) {
                 if (type == "any" || type == currentHero.getType()) {
                     nearestHero = currentHero;
                     break;
@@ -78,9 +93,10 @@ public abstract class Hero implements Game {
             for (int j = i + 1; j < teamSize; j++) {
                 currentHero = heroes.get(j);
 
-                boolean isAlive = currentHero.health > 0;
+                isAlive = currentHero.health > 0;
+                isWounded = currentHero.health < currentHero.maxHealth * 0.4;
 
-                if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive)) {
+                if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive) || (status == "wounded" && isWounded) ) {
                     if (type == "any" || type == currentHero.getType()) {
                         if (position.getDistance(currentHero) < position.getDistance(nearestHero)) {
                             nearestHero = currentHero;

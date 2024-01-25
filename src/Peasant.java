@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-public class Peasant extends Hero {
+public class Peasant extends Citizen {
     public Peasant(String name, int x, int y) {
         super(name,
                 100,
@@ -10,7 +8,8 @@ public class Peasant extends Hero {
                 new int[]{0, 0},
                 x,
                 y,
-                0);
+                0,
+                false);
     }
 
     @Override
