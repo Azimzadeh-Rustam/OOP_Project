@@ -63,7 +63,7 @@ public abstract class Archer extends Hero {
 
         int CRITICAL_AMOUNT_SNIPER_ARROWS = 3;
         int CRITICAL_AMOUNT_CROSSBOWMAN_ARROWS = 7;
-        int criticalArrows = (Objects.equals(this.getType(), "Sniper") ? CRITICAL_AMOUNT_SNIPER_ARROWS : CRITICAL_AMOUNT_CROSSBOWMAN_ARROWS);
+        int criticalArrows = (Objects.equals(getType(), "Sniper") ? CRITICAL_AMOUNT_SNIPER_ARROWS : CRITICAL_AMOUNT_CROSSBOWMAN_ARROWS);
         if (arrows < criticalArrows) {
             Citizen nearestFreePeasant = nearestFreeCitizen(teammates);
             if (nearestFreePeasant != null) {

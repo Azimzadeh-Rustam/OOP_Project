@@ -11,7 +11,7 @@ public class Citizen extends Hero {
     }
 
     protected void giveArrows (Archer hero) {
-        int newArrows = (int) ((hero.maxArrows - hero.arrows) * 0.6);
+        int newArrows = (int) ((hero.maxArrows - hero.arrows) * 0.7);
         hero.receiveArrows(newArrows);
     }
 
@@ -22,15 +22,10 @@ public class Citizen extends Hero {
         setIsBusy(true);
         if (position.getDistance(hero) < 2) {
             giveArrows(hero);
-            setIsBusy(false);
         }
         else {
-            hero.moveToward(hero, teammates);
+            moveToward(hero, teammates);
         }
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + ", Busy: " + (isBusy? "yes" : "no");
+        setIsBusy(false);
     }
 }
