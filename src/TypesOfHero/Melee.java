@@ -7,14 +7,9 @@ public class Melee extends Hero {
 
     protected int maxRangeAttack;
 
-    public Melee(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int maxRangeAttack) {
+    protected Melee(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int maxRangeAttack) {
         super(name, maxHealth, health, maxArmor, armor, damage, x, y, initiative);
         this.maxRangeAttack = maxRangeAttack;
-    }
-
-    @Override
-    public String getType() {
-        return null;
     }
 
     @Override

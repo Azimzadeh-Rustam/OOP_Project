@@ -1,9 +1,9 @@
 package Heroes;
 import TypesOfHero.Archer;
 
-public class Crossbowman extends Archer {
+public class CrossBowMan extends Archer {
 
-    public Crossbowman(String name, int x, int y) {
+    public CrossBowMan(String name, int x, int y) {
         super(name,
                 75,
                 75,
@@ -22,11 +22,11 @@ public class Crossbowman extends Archer {
 
     @Override
     public String getType() {
-        return "Crossbowman";
+        return "CrossBowMan";
     }
 
     @Override
     public String toString() {
-        return "Crossbowman" + super.toString();
+        return "CrossBowMan" + super.toString();
     }
 }

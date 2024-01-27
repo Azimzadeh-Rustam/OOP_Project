@@ -1,13 +1,13 @@
 package TypesOfHero;
-import Main.Vector2D;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public abstract class Archer extends Hero {
 
     protected int maxArrows, arrows, maxRangeShoot, meleeDamage, maxRangeAttack;
 
-    public Archer(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int maxArrows, int arrows, int maxRangeShoot, int meleeDamage, int maxRangeAttack) {
+    protected Archer(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int maxArrows, int arrows, int maxRangeShoot, int meleeDamage, int maxRangeAttack) {
         super(name, maxHealth, health, maxArmor, armor, damage, x, y, initiative);
         this.maxArrows = maxArrows;
         this.arrows = arrows;
@@ -16,19 +16,27 @@ public abstract class Archer extends Hero {
         this.maxRangeAttack = maxRangeAttack;
     }
 
-    public void receiveArrows(int newArrows) {
-        arrows += newArrows;
-    }
+    protected Citizen nearestFreeCitizen(ArrayList<Hero> teammates) {
+        Citizen nearestFreeCitizen = null;
 
-    public void bringArrows(Citizen hero, ArrayList<Hero> teammates) {
-        hero.setStatus(true);
-        if (hero.position.getDistance(this) < 2) {
-            hero.giveArrows(this);
-            hero.setStatus(false);
-            return;
+        for (Hero teammate : teammates) {
+            if (    teammate.health > 0 &&
+                    Objects.equals(teammate.getType(), "Peasant") &&
+                    !((Citizen) teammate).getIsBusy() ) {
+
+                if (    nearestFreeCitizen == null ||
+                        position.getDistance(teammate) < position.getDistance(nearestFreeCitizen) ) {
+
+                    nearestFreeCitizen = (Citizen) teammate;
+                }
+            }
         }
 
-        hero.moveToward(this, teammates);
+        return nearestFreeCitizen;
+    }
+
+    public void receiveArrows(int newArrows) {
+        arrows += newArrows;
     }
 
     protected void shoot(Hero enemy) {
@@ -52,21 +60,24 @@ public abstract class Archer extends Hero {
         Hero nearestEnemy = nearest(enemies, "alive", "any");
 
         if (nearestEnemy == null) return;
-/*
-        int criticalArrows = (this.getType() == "Sniper" ? 3 : 5);
+
+        int CRITICAL_AMOUNT_SNIPER_ARROWS = 3;
+        int CRITICAL_AMOUNT_CROSSBOWMAN_ARROWS = 7;
+        int criticalArrows = (Objects.equals(this.getType(), "Sniper") ? CRITICAL_AMOUNT_SNIPER_ARROWS : CRITICAL_AMOUNT_CROSSBOWMAN_ARROWS);
         if (arrows < criticalArrows) {
             Citizen nearestFreePeasant = nearestFreeCitizen(teammates);
             if (nearestFreePeasant != null) {
-                bringArrows(nearestFreePeasant, teammates);
+                nearestFreePeasant.bringArrows(this, teammates);
             }
         }
-*/
+
         double distanceToNearestEnemy = position.getDistance(nearestEnemy);
 
         if (arrows == 0) {
             if (distanceToNearestEnemy < maxRangeAttack) {
                 attack(nearestEnemy);
-            } else {
+            }
+            else {
                 moveToward(nearestEnemy, teammates);
             }
             return;

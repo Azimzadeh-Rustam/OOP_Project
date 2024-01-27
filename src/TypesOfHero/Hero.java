@@ -1,18 +1,16 @@
 package TypesOfHero;
 import Main.*;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Hero implements Game {
 
     protected String name;
-    protected float maxHealth, health, maxArmor, armor;
     protected int[] damage;
     protected Vector2D position;
+    protected int maxHealth, health, maxArmor, armor, initiative;
 
-    protected int initiative;
-
-    public Hero(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative) {
+    protected Hero(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.health = health;
@@ -23,18 +21,17 @@ public abstract class Hero implements Game {
         this.initiative = initiative;
     }
 
-    public abstract String getType();
     public String getName() {return name;}
-    public float getMaxHealth() {return maxHealth;}
-    public float getHealth() {return health;}
-    public float getMaxArmor() {return maxArmor;}
-    public float getArmor() {return armor;}
+    public int getMaxHealth() {return maxHealth;}
+    public int getHealth() {return health;}
+    public int getMaxArmor() {return maxArmor;}
+    public int getArmor() {return armor;}
     public Vector2D getPosition() {return new Vector2D (position.getX(), position.getY());}
     public int getInitiative() {return initiative;}
-
     public boolean isDead() {
         return health == 0;
     }
+    public String getType() {return null;};
 
     protected Vector2D nextPosition(Hero hero) {
         int step = 1;
@@ -46,11 +43,14 @@ public abstract class Hero implements Game {
 
         if (deltaX < 0) {
             nextPosition.setX(nextPosition.getX() + step);
-        } else if (deltaX > 0) {
+        }
+        else if (deltaX > 0) {
             nextPosition.setX(nextPosition.getX() - step);
-        } else if (deltaY < 0) {
+        }
+        else if (deltaY < 0) {
             nextPosition.setY(nextPosition.getY() + step);
-        } else if (deltaY > 0) {
+        }
+        else if (deltaY > 0) {
             nextPosition.setY(nextPosition.getY() - step);
         }
 
@@ -60,48 +60,34 @@ public abstract class Hero implements Game {
     protected void moveToward(Hero hero, ArrayList<Hero> teammates) {
         Vector2D nextPosition = nextPosition(hero);
         boolean isStepFree = true;
+
         for (Hero teammate : teammates) {
             if (nextPosition.equals(teammate.position) && teammate.health > 0) {
                 isStepFree = false;
                 break;
             }
         }
+
         if (isStepFree) position = nextPosition;
     }
 
     protected Hero nearest(ArrayList<Hero> heroes, String status, String type) {
-        Hero currentHero, nearestHero = null;
-        int teamSize = heroes.size();
-        int i;
-        boolean isAlive;
-        boolean isWounded;
+        Hero nearestHero = null;
 
-        for (i = 0; i < teamSize; i++) {
-            currentHero = heroes.get(i);
+        for (Hero hero : heroes) {
+            boolean isAlive = hero.health > 0;
+            boolean isWounded = hero.health < hero.maxHealth * 0.4;
 
-            isAlive = currentHero.health > 0;
-            isWounded = currentHero.health < currentHero.maxHealth * 0.4;
+            if (    Objects.equals(status, "alive") && isAlive ||
+                    Objects.equals(status, "dead") && !isAlive ||
+                    Objects.equals(status, "wounded") && isWounded ) {
 
-            if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive) || (status == "wounded" && isWounded) ) {
-                if (type == "any" || type == currentHero.getType()) {
-                    nearestHero = currentHero;
-                    break;
-                }
-            }
-        }
+                if (    Objects.equals(type, "any") ||
+                        Objects.equals(type, hero.getType()) ) {
 
-        if (nearestHero != null) {
-            for (int j = i + 1; j < teamSize; j++) {
-                currentHero = heroes.get(j);
-
-                isAlive = currentHero.health > 0;
-                isWounded = currentHero.health < currentHero.maxHealth * 0.4;
-
-                if ( (status == "alive" && isAlive) || (status == "dead" && !isAlive) || (status == "wounded" && isWounded) ) {
-                    if (type == "any" || type == currentHero.getType()) {
-                        if (position.getDistance(currentHero) < position.getDistance(nearestHero)) {
-                            nearestHero = currentHero;
-                        }
+                    if (    nearestHero == null ||
+                            position.getDistance(hero) < position.getDistance(nearestHero)) {
+                        nearestHero = hero;
                     }
                 }
             }
@@ -111,7 +97,7 @@ public abstract class Hero implements Game {
     }
 
 
-    protected void receiveDamage(float damage) {
+    protected void receiveDamage(int damage) {
         if (damage < armor) {
             armor -= damage;
             return;
@@ -122,12 +108,12 @@ public abstract class Hero implements Game {
         if (health < 0) health = 0;
     }
 
-    protected void receiveHealing(float healPoint) {
+    protected void receiveHealing(int healPoint) {
         health += healPoint;
         if (health > maxHealth) health = maxHealth;
     }
 
-    public void attack(Hero enemy) {}
+    protected void attack(Hero enemy) {}
 
     public void play(ArrayList<Hero> enemies, ArrayList<Hero> teammates) {}
 

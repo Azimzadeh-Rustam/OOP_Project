@@ -2,12 +2,13 @@ package TypesOfHero;
 import Main.Vector2D;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Healer extends Hero {
 
     protected int healPoint, maxRangeHeal, mana, maxMana, manaRecovery;
 
-    public Healer(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int healPoint, int maxRangeHeal, int mana, int maxMana, int manaRecovery) {
+    protected Healer(String name, int maxHealth, int health, int maxArmor, int armor, int[] damage, int x, int y, int initiative, int healPoint, int maxRangeHeal, int mana, int maxMana, int manaRecovery) {
         super(name, maxHealth, health, maxArmor, armor, damage, x, y, initiative);
         this.healPoint = healPoint;
         this.maxRangeHeal = maxRangeHeal;
@@ -33,11 +34,11 @@ public abstract class Healer extends Hero {
 
     protected boolean isAllMeleeDead(ArrayList<Hero> teammates) {
 
-        String infantryType = this.getType() == "Monk" ? "Pikeman" : "Rogue";
+        String infantryType = Objects.equals(getType(), "Monk") ? "Pikeman" : "Rogue";
         boolean isAnyInfantry = false;
 
         for (Hero teammate : teammates) {
-            if (teammate.getType() == infantryType) {
+            if (Objects.equals(teammate.getType(), infantryType)) {
                 isAnyInfantry = true;
 
                 if (teammate.health > 0) {
@@ -45,18 +46,18 @@ public abstract class Healer extends Hero {
                 }
             }
         }
+
         return isAnyInfantry;
     }
 
     protected void resurrect(Hero teammate) {
         teammate.receiveHealing(teammate.getMaxHealth());
-        mana -= (int) teammate.getMaxHealth();
+        mana -= teammate.getMaxHealth();
     }
 
     protected void helpNearestDeadMelee(ArrayList<Hero> teammates) {
 
-        String infantryType = (this.getType() == "Monk" ? "Pikeman" : "Rogue");
-
+        String infantryType = (Objects.equals(getType(), "Monk") ? "Pikeman" : "Rogue");
         Hero nearestDeadInfantryman = nearest(teammates, "dead", infantryType);
 
         double distanceToNearestDeadInfantryman = position.getDistance(nearestDeadInfantryman);
@@ -78,11 +79,6 @@ public abstract class Healer extends Hero {
             }
         }
         if (stepIsFree) position = nextPosition;
-    }
-
-    @Override
-    public String getType() {
-        return null;
     }
 
     @Override

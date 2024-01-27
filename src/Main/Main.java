@@ -38,7 +38,8 @@ public class Main {
             for (Hero hero : allSortedTeam) {
                 if (teamGreen.contains(hero)) {
                     hero.play(teamBlue, teamGreen);
-                } else {
+                }
+                else {
                     hero.play(teamGreen, teamBlue);
                 }
             }
@@ -58,7 +59,7 @@ public class Main {
         for (int i = 1; i < 11; i++) {
             switch(random.nextInt(1,5) + amount) {
                 case 1:
-                    heroes.add(new Crossbowman(getName(), x, i));
+                    heroes.add(new CrossBowMan(getName(), x, i));
                     break;
                 case 2:
                     heroes.add(new Monk(getName(), x, i));
